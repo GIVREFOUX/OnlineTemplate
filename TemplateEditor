@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: #1E1E1E;
+      font-family: 'Courier New', monospace;
+      color: #FFFFFF;
+      margin: 0;
+      padding: 0;
+    }
+
+    .cv-section {
+      margin: 20px;
+      border: 1px solid #2E2E2E;
+      padding: 20px;
+      word-wrap: break-word;
+    }
+
+    .name {
+      font-size: 24px;
+      font-weight: bold;
+      color: #569CD6;
+      cursor: pointer;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #CE9178;
+      cursor: pointer;
+    }
+
+    .section-content {
+      font-size: 14px;
+      line-height: 1.4;
+      color: #FFFFFF;
+      cursor: pointer;
+    }
+
+    .editable {
+      border-bottom: 1px dashed #569CD6;
+    }
+
+    .add-button {
+      background-color: #569CD6;
+      color: #FFFFFF;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .save-button {
+      background-color: #569CD6;
+      color: #FFFFFF;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .deletion-button {
+      background-color: #FF5B5B;
+      color: #FFFFFF;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cv-section">
+    <button class="add-button" onclick="addSection()">Add Section</button>
+  </div>
+
+  <!-- Start of Placeholder Section -->
+  <div class="cv-section">
+    <div class="name typing-effect" onclick="makeEditable(this)">[Your Name]</div>
+    <div class="section-content typing-effect" onclick="makeEditable(this)">[Your Title]</div>
+    <div class="section-content typing-effect" onclick="makeEditable(this)">[Your Location]</div>
+    <div class="section-content typing-effect" onclick="makeEditable(this)">[Your Phone]</div>
+    <div class="section-content typing-effect" onclick="makeEditable(this)">[Your Email]</div>
+    <div class="section-content typing-effect" onclick="makeEditable(this)"><a href="[Your LinkedIn Profile]" style="color: #569CD6;">LinkedIn</a></div>
+  </div>
+
+  <div class="cv-section">
+    <div class="section-title typing-effect" onclick="makeEditable(this)">Summary</div>
+    <div class="section-content typing-effect" onclick="makeEditable(this)">[Your Summary]</div>
+  </div>
+
+  <div class="cv-section">
+    <div class="section-title typing-effect" onclick="makeEditable(this)">Work Experience</div>
+    <div class="section-content">
+      <!-- Add your work experience here using the format below -->
+      <div class="work-entry">
+        <div class="work-headline typing-effect" onclick="makeEditable(this)"><b>[Work Period] | <span class="company">[Company Name]</span></b></div>
+        <div class="work-title" onclick="makeEditable(this)">Role: <span style="color: #569CD6;">[Job Title]</span></div>
+        <div class="formatted-text typing-effect" onclick="makeEditable(this)">[Description of your work]</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-section">
+    <div class="section-title typing-effect" onclick="makeEditable(this)">Education</div>
+    <div class="section-content typing-effect" onclick="makeEditable(this)">
+      <!-- Add your education entries here using the format below -->
+      <div class="education-entry">
+        <div class "education-headline typing-effect"><b>[Education Period] | [Degree, University (Masters/Bachelor)]</b></div>
+        <div class="formatted-text typing-effect" onclick="makeEditable(this)">[Description of your education]</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-section">
+    <div class="section-title typing-effect" onclick="makeEditable(this)">Skills</div>
+    <div class="section-content" onclick="makeEditable(this)">
+      <table style="border-collapse: collapse;">
+        <!-- Add your skills here using the format below -->
+        <tr>
+          <td style="padding-right: 20px;" onclick="makeEditable(this)">[Skill Name]</td>
+          <td><span class="level" onclick="makeEditable(this)">[Skill Level]</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="cv-section">
+    <div class="section-title typing-effect" onclick="makeEditable(this)">Languages</div>
+    <div class="section-content" onclick="makeEditable(this)">
+      <table style="border-collapse: collapse;">
+        <!-- Add your language skills here using the format below -->
+        <tr>
+          <td style="padding-right: 20px;" onclick="makeEditable(this)">[Language]</td>
+          <td><span class="level" onclick="makeEditable(this)">[Language Level]</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="cv-section">
+    <div class="section-title typing-effect" onclick="makeEditable(this)">Courses</div>
+    <div class="section-content" onclick="makeEditable(this)">
+      <div class="formatted-text" onclick="makeEditable(this)">
+        <table>
+          <!-- Add your courses here using the format below -->
+          <tr>
+            <td onclick="makeEditable(this)">[Course Title]</td>
+            <td><span class="company" style="color: #569CD6;" onclick="makeEditable(this)">[Course Provider]</span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-section">
+    <div class="section-title typing-effect" onclick="makeEditable(this)">Volunteering</div>
+    <div class="section-content" onclick="makeEditable(this)">
+      <!-- Add your volunteering experience here using the format below -->
+      <div class="volunteer-entry">
+        <div class="volunteer-headline typing-effect" onclick="makeEditable(this)"><b>[Volunteer Position], <span class="company" style="color: #569CD6;">[Volunteer Organization]</span></b></div>
+        <div class="formatted-text" onclick="makeEditable(this)">[Description of your volunteering work]</div>
+      </div>
+    </div>
+  </div>
+  <!-- End of Placeholder Section>
+
+  <!-- Add, Delete, and Save buttons -->
+  <div class="cv-section">
+    <button class="add-button" onclick="addSection()">Add Section</button>
+    <button class="deletion-button" onclick="deleteSection()">Delete Section</button>
+    <button class="save-button" onclick="saveCV()">Save as PDF</button>
+  </div>
+  
+  <script>
+    // Function to make a section editable
+    function makeEditable(element) {
+      element.setAttribute('contenteditable', 'true');
+      element.classList.add('editable');
+      element.focus();
+    }
+    
+    // Function to add a new section
+    function addSection() {
+      // Implement the logic to add a new section
+      alert('New section added');
+    }
+    
+    // Function to delete the last section
+    function deleteSection() {
+      // Implement the logic to delete the last section
+      alert('Last section deleted');
+    }
+    
+    // Function to save the edited CV as a PDF
+    function saveCV() {
+      const cvContent = document.documentElement.outerHTML; // Get the entire document content
+      const data = new Blob([cvContent], { type: 'application/pdf' });
+
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      const url = window.URL.createObjectURL(data);
+      a.href = url;
+      a.download = 'your_cv.pdf';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
