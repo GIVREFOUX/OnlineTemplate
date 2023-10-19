@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: #282C35;
+      font-family: 'Courier New', monospace;
+      color: #D6D6D6;
+      margin: 0;
+      padding: 0;
+    }
+
+    .cv-section {
+      margin: 20px;
+      border: 1px solid #444B58;
+      padding: 20px;
+      word-wrap: break-word;
+      position: relative;
+    }
+
+    .cv-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cv-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #569CD6;
+    }
+
+    .cv-icons {
+      display: flex;
+      align-items: center;
+    }
+
+    .cv-icon {
+      cursor: pointer;
+      padding: 5px;
+      font-size: 16px;
+      color: #D6D6D6;
+      transition: color 0.3s;
+    }
+
+    .cv-icon:hover {
+      color: #569CD6;
+    }
+
+    .name {
+      font-size: 24px;
+      font-weight: bold;
+      color: #569CD6;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #CE9178;
+    }
+
+    .section-content {
+      font-size: 14px;
+      line-height: 1.4;
+      color: #D6D6D6;
+    }
+
+    .editable {
+      border-bottom: 1px dashed #569CD6;
+    }
+
+    .typing-effect {
+      overflow: hidden;
+      white-space: nowrap;
+      animation: typing 2s steps(40, end) forwards, blink-caret 0.5s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-right: 2px solid transparent; }
+      50% { border-right: 2px solid #000; }
+    }
+
+    .formatted-text {
+      white-space: normal;
+    }
+
+    .level {
+      color: #569CD6;
+    }
+
+    .company {
+      color: #569CD6;
+    }
+
+    /* Additional colors */
+    .color-red {
+      color: #FF6B6B;
+    }
+
+    .color-yellow {
+      color: #FFD166;
+    }
+
+    .color-green {
+      color: #A0DF6D;
+    }
+  </style>
+</head>
+<body>
+  <div class="cv-section" id="personal-information">
+    <div class="cv-header">
+      <div class="cv-title">Personal Information</div>
+      <div class="cv-icons">
+        <i class="cv-icon material-icons" onclick="editSection(this)">edit</i>
+        <i class="cv-icon material-icons" onclick="deleteSection('personal-information')">delete</i>
+        <i class="cv-icon material-icons" onclick="addSection('personal-information')">add</i>
+      </div>
+    </div>
+    <div class="name typing-effect editable">[Your Name]</div>
+    <div class="section-content typing-effect editable">[Your Title]</div>
+    <div class="section-content typing-effect editable">[Your Location]</div>
+    <div class="section-content typing-effect editable">[Your Phone]</div>
+    <div class="section-content typing-effect editable">[Your Email]</div>
+    <div class="section-content typing-effect editable"><a href="[Your LinkedIn Profile]" style="color: #569CD6;">LinkedIn</a></div>
+  </div>
+
+  <div class="cv-section" id="summary">
+    <div class="cv-header">
+      <div class="cv-title">Summary</div>
+      <div class="cv-icons">
+        <i class="cv-icon material-icons" onclick="editSection(this)">edit</i>
+        <i class="cv-icon material-icons" onclick="deleteSection('summary')">delete</i>
+      </div>
+    </div>
+    <div class="section-content typing-effect editable">[Your Summary]</div>
+  </div>
+
+  <div class="cv-section">
+    <div class="cv-icons">
+      <i class="cv-icon material-icons" onclick="saveCV()">save</i>
+    </div>
+  </div>
+
+  <script>
+    function editSection(element) {
+      const section = element.closest('.cv-section');
+      section.querySelectorAll('.editable').forEach((el) => el.setAttribute('contenteditable', 'true'));
+      section.querySelectorAll('.editable').forEach((el) => el.classList.add('editable-active'));
+      section.querySelectorAll('.editable')[0].focus();
+    }
+
+    function addSection(sectionId) {
+      const newSection = document.createElement('div');
+      newSection.className = 'cv-section';
+      newSection.innerHTML = `
+        <div class="cv-header">
+          <div class="cv-title color-red" contenteditable="true">New Section</div>
+          <div class="cv-icons">
+            <i class="cv-icon material-icons" onclick="editSection(this)">edit</i>
+            <i class="cv-icon material-icons" onclick="deleteSection(this)">delete</i>
+          </div>
+        </div>
+        <div class="section-content typing-effect editable"></div>
+      `;
+      newSection.id = 'new-section';
+      document.body.appendChild(newSection);
+    }
+
+    function deleteSection(element) {
+      if (element instanceof HTMLElement) {
+        element.closest('.cv-section').remove();
+      } else {
+        console.log('Last section deleted');
+        const sections = document.querySelectorAll('.cv-section');
+        if (sections.length > 2) { // Ensure at least two sections are present
+          sections[sections.length - 1].remove();
+        }
+      }
+    }
+
+    function saveCV() {
+      const doc = new jsPDF();
+      document.querySelectorAll('.cv-section').forEach((section) => {
+        const title = section.querySelector('.cv-title').textContent;
+        const content = section.querySelector('.editable').textContent;
+        doc.text(title, 20, doc.previousAutoTable.finalY + 10);
+        doc.text(content, 20, doc.previousAutoTable.finalY + 20);
+      }
+      );
+      doc.save('cv.pdf');
+    }
+  </script>
+</body>
+</html>
